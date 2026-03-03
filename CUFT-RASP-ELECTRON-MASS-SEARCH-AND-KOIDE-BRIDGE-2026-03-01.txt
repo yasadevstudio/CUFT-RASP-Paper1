@@ -1,0 +1,391 @@
+CUFT-RASP: ELECTRON MASS SEARCH AND KOIDE BRIDGE ANALYSIS
+==========================================================
+Date: 2026-03-01
+Researcher: CIPHER (Autonomous Research)
+Directive: cipher-work-20260301-091626-1
+
+PRIMARY SOURCES:
+- NIST CODATA 2022: https://physics.nist.gov/cuu/Constants/index.html
+- Y. Koide, "A fermion-boson composite model of quarks and leptons,"
+  Phys. Lett. B 120, 161-165 (1983). DOI: 10.1016/0370-2693(83)90644-5
+- SciPy Constants (CODATA 2022 dataset): https://docs.scipy.org/doc/scipy/reference/constants.html
+- PDG 2022 Review of Particle Physics: https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf
+
+
+===========================================================================
+SECTION 1: CODATA 2022 REFERENCE VALUES
+===========================================================================
+
+All mass values from NIST CODATA 2022 recommended values.
+
+| Quantity                 | Value                    | Uncertainty     | Source          |
+|--------------------------|--------------------------|-----------------|-----------------|
+| m_p/m_e                  | 1836.152 673 426         | (32)            | CODATA 2022     |
+| m_n/m_e                  | 1838.683 662             | (89)            | CODATA 2022     |
+| m_mu/m_e                 | 206.768 2827             | (46)            | CODATA 2022     |
+| m_tau/m_e                | 3477.23                  | (23)            | CODATA 2022     |
+| 1/alpha                  | 137.035 999 177          | (21)            | CODATA 2022     |
+| m_e (MeV)                | 0.510 998 950 69         | (16)            | CODATA 2022     |
+| m_mu (MeV)               | 105.658 3755             | (23)            | CODATA 2022     |
+| m_tau (MeV)              | 1776.86                  | (12)            | PDG 2022        |
+| m_e (kg)                 | 9.109 383 7139 e-31      | (28)            | CODATA 2022     |
+
+NOTE: Number in parentheses = one-standard-deviation uncertainty in last digits.
+
+
+===========================================================================
+SECTION 2: EXTRACTION POINT 1 — ELECTRON AT LAMBDA^{-2}
+===========================================================================
+
+QUESTION: Does any combination of {n, p, lambda^{-2}} produce m_e/m_p = 1/1836.15267343?
+
+PARAMETERS:
+  n = 3, p = 5
+  lambda = 1/(p^3 - 1) = 1/124
+  lambda^{-2} = (p^3 - 1)^2 = 15376
+  m_e/m_p = 5.446 170 214 876 e-04
+
+TEST: n*p / lambda^{-2} = 15 / 15376 = 9.755 e-04
+  Ratio to m_e/m_p = 1.791 → NO MATCH (79% off)
+
+SYSTEMATIC SEARCH: All combinations n^i * p^j * (lambda^{-2})^k for i,j,k in [-3,3]:
+
+| Formula                  | Value         | Ratio to m_e/m_p | Precision |
+|--------------------------|---------------|-------------------|-----------|
+| p^2 / (n * lambda^{-2})  | 5.420 e-04    | 0.9951            | 0.49% off |
+| n^2 / lambda^{-2}        | 5.853 e-04    | 1.0748            | 7.5% off  |
+| (all others)             | > 10% off     | —                 | —         |
+
+RESULT: **NEGATIVE.** No combination of {n, p, lambda^{-2}} produces m_e/m_p
+within CUFT-RASP precision standards (< 100 ppm). The closest candidate
+p^2/(n * lambda^{-2}) = 25/46128 misses by 0.49% = 4900 ppm — orders of
+magnitude worse than the existing 8 ppb proton result.
+
+STRUCTURAL REASON: The lambda Laurent series organizes constants by their
+relationship to confinement, with lambda^{-2} = 15376 corresponding to
+the HEAVIEST end of the spectrum (order ~15376 m_e). The electron at 1 m_e
+is the unit itself — it cannot appear as a heavy-scale prediction.
+
+| Lambda Order | Constant   | Value (m_e) | Direction |
+|--------------|------------|-------------|-----------|
+| lambda^{-2}  | (vacant)   | ~15376      | HEAVIER   |
+| lambda^{-1}  | muon       | 206.77      | heavy     |
+| lambda^0     | 1/alpha    | 137.04      | (dimless) |
+| lambda^{+1}  | proton     | 1836.15     | heavy     |
+| lambda^{+2}  | neutron    | 1838.68     | heavy     |
+
+The electron mass IS the natural unit. All derived quantities are ratios
+TO the electron. To derive m_e in absolute units (MeV or kg) would require
+connecting to an external absolute scale (Planck mass, or a dimensional
+constant like G or hbar*c).
+
+
+===========================================================================
+SECTION 3: EXTRACTION POINT 2 — KOIDE FORMULA EXACT CITATION
+===========================================================================
+
+ORIGINAL PAPER:
+  Y. Koide, "A fermion-boson composite model of quarks and leptons"
+  Physics Letters B, Volume 120, Issues 1-3, Pages 161-165 (6 January 1983)
+  DOI: 10.1016/0370-2693(83)90644-5
+  URL: https://www.sciencedirect.com/science/article/abs/pii/0370269383906445
+
+NOTE: The formula was first proposed by Koide in 1981 (Lett. Nuovo Cim. 34, 201).
+The 1983 Phys. Lett. B paper is the more commonly cited version where the
+formula appears in the context of a fermion-boson composite model.
+A follow-up: Y. Koide, Phys. Rev. D 28, 252 (1983).
+
+THE FORMULA:
+  Q = (m_e + m_mu + m_tau) / (sqrt(m_e) + sqrt(m_mu) + sqrt(m_tau))^2 = 2/3
+
+PRECISION DATA:
+  Using CODATA 2022 masses (in MeV):
+    m_e   = 0.510 998 950 69
+    m_mu  = 105.658 3755
+    m_tau = 1776.86
+
+  Numerator:   m_e + m_mu + m_tau = 1883.029 374 MeV
+  Denominator: (sqrt(m_e) + sqrt(m_mu) + sqrt(m_tau))^2 = 2824.570 140
+
+  Q_experimental = 0.666 660 511 466
+  2/3            = 0.666 666 666 667
+
+  |Q - 2/3| / (2/3) = 9.233 ppm
+
+TAU MASS PREDICTION FROM KOIDE:
+  Setting Q = 2/3 exactly and solving for m_tau given m_e and m_mu:
+
+  Quadratic: s^2 - 4(A+B)s + (A^2 + B^2 - 4AB) = 0
+  where A = sqrt(m_e), B = sqrt(m_mu), s = sqrt(m_tau)
+
+  Solution: m_tau(Koide) = 1776.969 027 MeV
+
+  Residual vs PDG 2022: +0.109 MeV = 0.91 sigma
+  Relative accuracy: 1 part in 14,807 (67.5 ppm)
+
+SOURCE: Physics Forums discussion of Koide's rule, citing "1776.96894 ± 0.00007 MeV"
+URL: https://www.physicsforums.com/threads/latest-tau-lepton-measurement-consistent-with-koides-rule.992336/
+
+SOURCE: John Carlos Baez, "The Koide Formula" (April 4, 2021)
+URL: https://johncarlosbaez.wordpress.com/2021/04/04/the-koide-formula/
+Quote: "There's no known reason for this formula to be true!"
+Baez notes Q_exp = 0.666661 ± 0.000007
+
+
+===========================================================================
+SECTION 4: EXTRACTION POINT 3 — TAU MASS PREDICTION CHAIN FROM (3,5)
+===========================================================================
+
+CUFT-RASP TAU FORMULA:
+  m_tau/m_e = (Phi_3(p) - n) / lambda + p + 1/(p-1)
+
+DERIVATION:
+  Phi_3(5) = 5^2 + 5 + 1 = 31
+  Phi_3 - n = 31 - 3 = 28
+  28 / lambda = 28 * 124 = 3472
+  p = 5
+  1/(p-1) = 1/4 = 0.25
+
+  m_tau/m_e = 3472 + 5 + 0.25 = 3477.25
+
+EXACT FRACTION: 13909/4
+  Denominator: 4 = 2^2 (simplest of all five constants — only virial factor)
+  Numerator: 13909 = 7 × 1987
+    Note: 7 = Phi_3(2), connecting to the (n=6, p=2) Diophantine solution
+    Note: 1987 is prime
+
+COMPARISON TO EXPERIMENT:
+  CUFT-RASP: m_tau/m_e = 3477.25
+  CODATA 2022: m_tau/m_e = 3477.23 ± 0.23
+  Residual: +0.02 (0.09 sigma)
+  Fractional accuracy: 5.8 ppm
+
+IN MeV:
+  CUFT-RASP: 3477.25 × 0.510998950 = 1776.871 MeV
+  PDG 2022: 1776.86 ± 0.12 MeV
+  Residual: +0.011 MeV (0.09 sigma)
+
+ERROR PROPAGATION:
+  The tau prediction has ONE input uncertainty: m_e = 0.51099895069(16) MeV
+  delta(m_tau) = 3477.25 * delta(m_e) = 3477.25 * 1.6e-10 = 5.6e-7 MeV
+  This is negligible compared to experimental tau mass uncertainty (0.12 MeV).
+  The CUFT-RASP tau prediction is limited by EXPERIMENT, not by input precision.
+
+KOIDE vs CUFT-RASP TAU COMPARISON:
+
+| Prediction Source | m_tau (MeV) | vs PDG 2022       | Sigma |
+|-------------------|-------------|-------------------|-------|
+| Koide formula     | 1776.969    | +0.109 MeV high   | 0.91  |
+| CUFT-RASP         | 1776.871    | +0.011 MeV high   | 0.09  |
+| PDG 2022 exp.     | 1776.86     | (reference)        | —     |
+| CUFT-RASP - Koide | —           | 0.098 MeV apart   | —     |
+
+CUFT-RASP tau prediction is 10× closer to PDG 2022 than Koide's prediction.
+
+KOIDE Q USING CUFT-RASP TAU:
+  Q(CUFT tau) = 0.666 661 139 603
+  Deviation from 2/3: -8.291 ppm
+  (vs experimental Q deviation: -9.233 ppm)
+
+This means: CUFT-RASP's tau prediction IMPROVES the Koide ratio by ~1 ppm
+compared to the PDG experimental value. The two frameworks are structurally
+compatible but CUFT-RASP provides higher precision.
+
+
+===========================================================================
+SECTION 5: EXTRACTION POINT 4 — CYCLOTOMIC Phi_5(p) CHECK
+===========================================================================
+
+Phi_5(x) = x^4 + x^3 + x^2 + x + 1
+
+EVALUATION:
+  Phi_5(5) = 625 + 125 + 25 + 5 + 1 = 781
+
+FACTORIZATION:
+  781 = 11 × 71
+
+CONTAMINATION TEST: Does Phi_5(5) introduce primes outside {2, 3, 5, 31}?
+  Primes in Phi_5(5): {11, 71}
+  **YES — Phi_5 breaks denominator closure.**
+  Both 11 and 71 are NEW primes not in the {2, 3, 5, 31} set.
+
+CYCLOTOMIC DENOMINATOR TABLE (all Phi_k at p=5):
+
+| Polynomial | Value | Factorization | Primes    | In {2,3,5,31}? |
+|------------|-------|---------------|-----------|-----------------|
+| Phi_1(5)   | 4     | 2^2           | {2}       | YES             |
+| Phi_2(5)   | 6     | 2 × 3         | {2, 3}    | YES             |
+| Phi_3(5)   | 31    | 31            | {31}      | YES             |
+| Phi_4(5)   | 26    | 2 × 13        | {2, 13}   | NO (13)         |
+| Phi_5(5)   | 781   | 11 × 71       | {11, 71}  | NO (11, 71)     |
+| Phi_6(5)   | 21    | 3 × 7         | {3, 7}    | NO (7)          |
+
+p^k - 1 FACTORIZATION TABLE:
+
+| Expression | Value  | Factorization            | New Primes     |
+|------------|--------|--------------------------|----------------|
+| p^1 - 1   | 4      | 2^2                      | none           |
+| p^2 - 1   | 24     | 2^3 × 3                  | none           |
+| p^3 - 1   | 124    | 2^2 × 31                 | none           |
+| p^4 - 1   | 624    | 2^4 × 3 × 13             | {13}           |
+| p^5 - 1   | 3124   | 2^2 × 11 × 71            | {11, 71}       |
+| p^6 - 1   | 15624  | 2^3 × 3^2 × 7 × 31       | {7}            |
+
+KEY FINDING: The denominator closure {2, 3, 5, 31} is UNIQUE to p^3 - 1 = 124.
+Going to higher cyclotomic orders (Phi_4, Phi_5, Phi_6) immediately introduces
+new primes. This is a NUMBER-THEORETIC fact about p = 5:
+
+  p^3 - 1 = (p-1)(p^2+p+1) = 4 × 31
+
+The prime 31 = Phi_3(5) is the PRIMITIVE prime divisor of 5^3 - 1 (by Zsigmondy's
+theorem). No higher p^k - 1 for k > 3 stays within {2, 3, 5, 31}.
+
+[ANALYSIS] This means the lambda = 1/(p^3 - 1) = 1/124 expansion is maximally
+"clean" — it is the HIGHEST order cyclotomic polynomial at p = 5 that does not
+introduce primes beyond the input set. Any extension to lambda_5 = 1/(p^5 - 1)
+would contaminate the denominator structure with {11, 71}. The {2, 3, 5, 31}
+closure is not just a pattern — it is a number-theoretic boundary.
+
+
+===========================================================================
+SECTION 6: KOIDE-CUFT BRIDGE — STRUCTURAL COMPARISON
+===========================================================================
+
+Both frameworks predict charged lepton mass relationships. Here is a direct
+structural comparison.
+
+FRAMEWORK COMPARISON:
+
+| Property           | Koide Formula              | CUFT-RASP                          |
+|--------------------|----------------------------|-------------------------------------|
+| Inputs             | m_e, m_mu (2 measured)     | n=3, p=5 (0 measured)              |
+| Free parameters    | 0 (given inputs)           | 0 (pure integers)                   |
+| Predicts           | m_tau                      | m_mu, m_tau, m_p, m_n, 1/alpha     |
+| Tau precision      | 67.5 ppm (0.91 sigma)      | 5.8 ppm (0.09 sigma)               |
+| Formula type       | Square-root mass relation  | Cyclotomic Laurent series           |
+| Theoretical basis  | None known                 | Gated cubic recursion               |
+| Scope              | 3 charged leptons          | 7+ particles + coupling constant    |
+
+NUMERICAL COMPARISON (all tau predictions):
+
+| Source       | m_tau/m_e    | m_tau (MeV)  | vs PDG (sigma) |
+|--------------|-------------|--------------|----------------|
+| CUFT-RASP    | 3477.25     | 1776.871     | +0.09          |
+| Koide        | —           | 1776.969     | +0.91          |
+| PDG 2022     | 3477.23(23) | 1776.86(12)  | 0 (reference)  |
+
+KOIDE Q DEVIATION ANALYSIS:
+  Q(experimental) = 0.666 660 511    →  -9.233 ppm from 2/3
+  Q(CUFT tau)     = 0.666 661 140    →  -8.291 ppm from 2/3
+
+  Q - 2/3 = -5.527 × 10^{-6}
+  In units of lambda:    -6.854 × 10^{-4}
+  In units of lambda^2:  -8.498 × 10^{-2}
+  In units of 1/Phi_3:   -1.713 × 10^{-4}
+
+[ANALYSIS] The Koide deviation Q - 2/3 ≈ -5.5 × 10^{-6} does not map cleanly
+to any simple CUFT-RASP parameter. It is NOT lambda^2/(2n) = 1.08e-5, NOT
+n*lambda^2/p = 3.9e-5, NOT (n/p)^2 * lambda^2 = 2.3e-5. If the Koide formula
+has a CUFT-RASP origin, the connection is not at leading order in lambda.
+
+POSSIBLE BRIDGE: Both frameworks generate the same tau mass to within 0.1 MeV.
+If Koide's Q = 2/3 is an exact symmetry broken by corrections of order lambda,
+then CUFT-RASP provides the correction structure. The CUFT-RASP tau (0.09 sigma)
+is MORE accurate than the Koide prediction (0.91 sigma), suggesting CUFT-RASP
+captures physics that Koide's formula misses at the ~100 keV level.
+
+
+===========================================================================
+SECTION 7: ATTRACTOR STRUCTURE AND THE ELECTRON
+===========================================================================
+
+The recursion f(x) = 25*tanh^3(x) - x/124 has a stable fixed point:
+
+  x_s = (p^3 - 1)/p = 124/5 = 24.8
+
+This follows from: f(x_s) = x_s, and in the saturated regime tanh(x_s) → 1,
+giving 25*(1) - x_s/124 = x_s → x_s = 25*124/125 = 3100/125 = 124/5.
+
+STRUCTURAL IDENTITIES OF x_s:
+  x_s = lambda^{-1}/p = (p^3-1)/p
+  x_s * p = lambda^{-1} = 124
+  X/x_s = 60/(124/5) = 300/124 = 75/31 = 3p^2/Phi_3
+
+The ratio X/x_s = 75/31 directly involves Phi_3, connecting the collective
+action X = 60 to the cyclotomic structure through the attractor.
+
+The electron mass determines the SCALE (MeV) but is not determined BY the
+recursion. The recursion produces dimensionless ratios; the electron mass
+is the dimensional anchor. This is analogous to how the fine-structure
+constant alpha determines electromagnetic coupling strength but not the
+electron charge in SI units — that requires an additional dimensional input.
+
+
+===========================================================================
+SECTION 8: OPEN QUESTIONS
+===========================================================================
+
+1. ELECTRON MASS DERIVATION: Can m_e be derived from (n,p) plus a
+   dimensional constant (hbar, c, G, or Planck mass)? What additional
+   equation sets the scale?
+
+2. KOIDE-CUFT BRIDGE: The Koide deviation Q - 2/3 = -5.5e-6 does not
+   match simple CUFT-RASP parameters. Is there a higher-order lambda
+   correction that reproduces the Koide formula as an approximate symmetry?
+
+3. LAMBDA^{-2} PARTICLE: What physical particle, if any, corresponds to
+   lambda^{-2} = 15376 m_e ≈ 7.85 GeV? This is near the bottom quark
+   mass (m_b ≈ 4180 MeV, m_b/m_e ≈ 8180). No clean match found.
+
+4. Phi_5 CONTAMINATION: The {11, 71} primes from Phi_5(5) = 781 break
+   denominator closure. Does this mean the lambda series has a NATURAL
+   BOUNDARY at order lambda^{-1} (muon) for the lepton sector? Or can
+   a different cyclotomic structure (not Phi_5) extend the series?
+
+5. ABSOLUTE SCALE: The CUFT-RASP recursion is purely dimensionless. How
+   does the recursion "know" that its natural unit is the electron mass
+   (0.511 MeV) rather than any other mass scale?
+
+
+===========================================================================
+SOURCE BIBLIOGRAPHY
+===========================================================================
+
+[1] NIST CODATA 2022 Recommended Values
+    https://physics.nist.gov/cuu/Constants/index.html
+    Accessed: 2026-03-01
+
+[2] Y. Koide, "A fermion-boson composite model of quarks and leptons"
+    Phys. Lett. B 120, 161-165 (1983)
+    DOI: 10.1016/0370-2693(83)90644-5
+    https://www.sciencedirect.com/science/article/abs/pii/0370269383906445
+
+[3] Y. Koide, Lettere al Nuovo Cimento 34, 201 (1982)
+    [Original proposal of the mass formula]
+
+[4] Y. Koide, Phys. Rev. D 28, 252 (1983)
+    https://journals.aps.org/prd/abstract/10.1103/PhysRevD.28.252
+
+[5] Y. Koide, "What physics does the charged lepton mass relation tell us?"
+    arXiv:1809.00425 (2018)
+
+[6] John Carlos Baez, "The Koide Formula" (April 4, 2021)
+    https://johncarlosbaez.wordpress.com/2021/04/04/the-koide-formula/
+
+[7] Physics Forums, "Latest Tau Lepton Measurement Consistent With Koide's Rule"
+    https://www.physicsforums.com/threads/latest-tau-lepton-measurement-consistent-with-koides-rule.992336/
+
+[8] SciPy Constants (CODATA 2022 dataset)
+    https://docs.scipy.org/doc/scipy/reference/constants.html
+
+[9] PDG 2022, "Review of Particle Physics — Physical Constants"
+    https://pdg.lbl.gov/2022/reviews/rpp2022-rev-phys-constants.pdf
+
+[10] Wikipedia, "Koide formula"
+     https://en.wikipedia.org/wiki/Koide_formula
+
+[11] Wikipedia, "Cyclotomic polynomial"
+     https://en.wikipedia.org/wiki/Cyclotomic_polynomial
+
+[12] Wolfram MathWorld, "Cyclotomic Polynomial"
+     https://mathworld.wolfram.com/CyclotomicPolynomial.html

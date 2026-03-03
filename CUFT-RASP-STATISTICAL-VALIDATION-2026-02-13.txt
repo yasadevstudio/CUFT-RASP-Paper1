@@ -1,0 +1,367 @@
+================================================================================
+CUFT-RASP STATISTICAL VALIDATION REPORT
+================================================================================
+Generated: 2026-02-13 12:31 CST
+Directive: dmn-work-20260213-123057-1
+Type: Statistical analysis + toolkit applicability assessment
+Method: 7 independent analyses + temporal-correlation-toolkit evaluation
+Sources: CUFT-RASP-PUBLICATION-DRAFT-2026-02-12.txt,
+         CUFT-RASP-EXPERIMENTAL-TESTABILITY-DATA-2026.txt,
+         temporal-correlation-toolkit.py v2
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+This report applies multiple statistical methods to validate CUFT-RASP
+predictions against known physics measurements. Seven independent analyses
+were conducted:
+
+RESULT: CUFT-RASP's primary prediction (proton-to-electron mass ratio)
+matches CODATA 2022 to 8.0 ppb from essentially 2 inputs (n=3 and k=n
+axiom). Monte Carlo testing shows this match has probability ~10^-5 among
+random formulas of similar structure. Information-theoretic analysis shows
+10.4:1 compression ratio (minimum) — genuinely more output information
+than input information.
+
+TOOLKIT VERDICT: The temporal-correlation-toolkit (built by SENTINEL
+directive 110123) is NOT the right tool for this validation task. It was
+designed for correlating historical event timelines spanning centuries.
+CUFT-RASP validation requires numerical accuracy testing, not temporal
+pattern detection. Standard statistical methods (residual analysis, Monte
+Carlo probability, information theory) are the appropriate tools.
+
+OVERALL GRADE: B+
+
+================================================================================
+ANALYSIS 1: PRIMARY PREDICTION ACCURACY
+================================================================================
+
+CUFT-RASP Mass Formula:
+  M = X^2/2 + (n/p)*X + n^2/X + lambda/n
+  M = 853811/465
+
+  RASP M = 1836.152688172043
+  CODATA 2022 mu = 1836.152673426(32)
+
+  Residual: +0.000014746 (RASP overshoots by ~14.7 microunits)
+  Fractional accuracy: 8.03 x 10^-9 = 8.0 ppb
+
+  Sigma deviation:
+    Using CODATA uncertainty (32 in last digits = 3.2e-8):  460.8 sigma
+    Using publication's rounded uncertainty (11 = 1.1e-7):  134.1 sigma
+
+  IMPORTANT CLARIFICATION: The publication draft states "134 sigma" which
+  uses a ROUNDED version of the CODATA value (1836.15267343(11)). Using
+  the FULL CODATA 2022 value 1836.152673426(32), the deviation is actually
+  460.8 sigma. This is an error in the publication draft that should be
+  corrected before submission.
+
+  WHAT THIS MEANS:
+  - RASP does NOT match CODATA to within measurement uncertainty
+  - RASP is ~300-400x LESS precise than current measurements (8 ppb vs 17-26 ppt)
+  - The 8 ppb accuracy IS remarkable given only 2 inputs
+  - The residual traces entirely to lambda = 1/124 vs back-calculated 0.008020
+
+  Residual decomposition:
+    lambda_RASP = 1/124 = 0.008064516
+    lambda_exact = 0.008020 (value that reproduces CODATA mu exactly)
+    lambda gap = 0.55% — this accounts for the entire 8 ppb residual
+
+================================================================================
+ANALYSIS 2: PROBABILITY OF RANDOM MATCH (MONTE CARLO)
+================================================================================
+
+Question: How likely is an 8-ppb match by chance?
+
+METHOD 1: Uniform random in [1835, 1837]
+  10,000,000 simulations
+  Matches within 8 ppb: 152
+  P(match) = 1.52 x 10^-5
+
+METHOD 2: Random rationals a/b (a < 100,000, b < 1,000)
+  1,000,000 samples → 33 near 1836
+  Matches within 8 ppb: 0
+  P(match | near target) < 10^-2 (insufficient sample near target)
+
+METHOD 3: Random 4-term formulas M = X^2/2 + c1*X + c_{-1}/X + c0
+  10,000,000 random parameter sets
+  (X in [1,100], c1 in [-10,10], c_{-1} in [-30,30], c0 in [-1,1])
+  Values near 1836: 3,402
+  Matches within 8 ppb: 0
+  P(match | near target & similar structure) < 3 x 10^-4
+
+CONCLUSION: The 8-ppb match is NOT easily achievable by random parameter
+selection, even among formulas with identical 4-term structure. However,
+this test has caveats:
+  - RASP's parameters are not random; they follow a derivation chain
+  - The relevant question is whether the chain is logically compelled
+  - Post-hoc tuning of a single parameter (lambda) could achieve this
+  - The honest strength is in the DERIVATION, not the numerical coincidence
+
+================================================================================
+ANALYSIS 3: DIOPHANTINE SOLUTION VS KNOWN PARTICLES
+================================================================================
+
+The Diophantine equation (n-2)(p-1) = 4 has three solutions:
+
+| n | p | Gamma | X  | M(n,p)     | Nearest Particle     | Delta  | Match   |
+|---|---|-------|----|------------|---------------------|--------|---------|
+| 3 | 5 |   25  | 60 | 1836.153   | proton (1836.153)   | 0.00%  | EXACT   |
+| 4 | 3 |    9  | 24 |  320.676   | pion+ (273.132)     | 17.41% | POOR    |
+| 6 | 2 |    4  | 12 |  111.024   | strange_q (181.000) | 38.66% | NONE    |
+
+ASSESSMENT:
+  - The n=3 solution matches the proton EXACTLY (by design — this is the target)
+  - The n=4 and n=6 solutions do NOT match any known particle
+  - The n=3 uniqueness theorem (gain-coherence + Diophantine compatible ONLY for
+    n=3) provides a dynamical explanation for why only the proton channel is realized
+  - The non-matching solutions are UNFALSIFIED predictions: they predict particles
+    that don't exist, but the framework argues they shouldn't exist (Theorem 10)
+
+================================================================================
+ANALYSIS 4: RASP LAMBDA vs QED ALPHA
+================================================================================
+
+| Quantity           | Value        | Source        |
+|--------------------|-------------|---------------|
+| RASP lambda        | 0.008064516 | 1/(p^3 - 1)  |
+| QED alpha          | 0.007297353 | CODATA 2022   |
+| Ratio lambda/alpha | 1.105129    | —             |
+| Difference         | 0.000767    | —             |
+| Relative gap       | 10.5%       | —             |
+
+Closest simple fraction for ratio: 21/19 = 1.10526 (0.001% off)
+
+ASSESSMENT:
+  - lambda and alpha are similar in magnitude (~0.008 vs ~0.007)
+  - The ratio 1.105 has no obvious simple expression
+  - RASP does NOT predict or derive alpha
+  - Any deeper connection would need to explain why lambda ≈ 1.1 * alpha
+  - This remains an OPEN QUESTION, not a validation of RASP
+  - GRADE: C (no clear relationship established)
+
+================================================================================
+ANALYSIS 5: INFORMATION-THEORETIC ASSESSMENT
+================================================================================
+
+Kolmogorov complexity / compression analysis:
+
+| Metric                   | Value     |
+|--------------------------|-----------|
+| Output precision         | 26.9 bits | (matching mu to 8 ppb ≈ log2(1/8e-9))
+| Input (minimum)          | 2.6 bits  | (n=3 ≈ log2(3), + 1 bit for k=n axiom)
+| Input (with Occam)       | 10.7 bits | (+ log2(275) for Occam selection)
+| Compression (minimum)    | 10.4:1    |
+| Compression (with Occam) | 2.5:1     |
+
+INTERPRETATION:
+  The minimum compression ratio (10.4:1) is genuinely impressive — it means
+  RASP's output contains ~10x more information than its input. This is the
+  hallmark of a framework that captures real structure, not mere parameter fitting.
+
+  The Occam-adjusted ratio (2.5:1) is more conservative but still positive.
+  This accounts for the hidden "choice" of selecting the simplest completion
+  from 275 candidates.
+
+  For comparison:
+  - Parameter fitting (N inputs → N outputs): ratio = 1:1
+  - Numerology (post-hoc selection): ratio < 1:1 (more input than output)
+  - Genuine theory: ratio > 1:1 (predictive compression)
+
+  RASP's 2.5-10.4:1 ratio sits in the "genuine theory" range, but closer
+  to the low end when Occam overhead is included.
+
+================================================================================
+ANALYSIS 6: TEMPORAL-CORRELATION-TOOLKIT APPLICABILITY
+================================================================================
+
+TOOLKIT DESIGN:
+  - temporal-correlation-toolkit.py v2 (built by SENTINEL directive 110123)
+  - Designed for: correlating historical event timelines (centuries of data)
+  - Statistical engines: Monte Carlo clustering, chi-square temporal uniformity,
+    geographic correlation, cross-dataset comparison
+  - Input format: Event objects with year_start, year_end, category, region
+
+APPLICABILITY TO CUFT-RASP VALIDATION:
+
+  Test performed: Encoded RASP derivation steps (all year=2026) as events in
+  Dataset A, and CODATA measurements (2022-2024) as events in Dataset B.
+  Ran compare_datasets() with window=5 years.
+
+  Result:
+    Observed co-occurrences: 24
+    Null mean: 24.0
+    p-value: 1.000
+    z-score: 0.00
+    Significant: NO
+
+  This result is TRIVIALLY EXPECTED. All events fall within a 5-year window,
+  so everything co-occurs regardless of content. The toolkit tests temporal
+  patterns across long time spans — there is no meaningful temporal pattern
+  to detect in a 4-year window.
+
+  VERDICT: The temporal-correlation-toolkit is NOT appropriate for CUFT-RASP
+  prediction validation. The toolkit would be useful for CUFT-RASP if:
+
+  1. Time-series of improving RASP predictions existed (tracking mu accuracy
+     over iterations of framework development)
+  2. Multiple independent frameworks (RASP, Recognition Science, Koide, etc.)
+     were being compared for temporal development patterns
+  3. Historical measurements of mu (1900-2024) were correlated with theoretical
+     prediction milestones
+
+  For single-point numerical prediction validation, standard statistical
+  methods (residual analysis, Monte Carlo probability, information theory)
+  are the correct tools — and those are what this report uses in Analyses 1-5.
+
+================================================================================
+ANALYSIS 7: COMPREHENSIVE PREDICTION SCORECARD
+================================================================================
+
+| # | Prediction                          | Grade | Detail                              |
+|---|-------------------------------------|-------|--------------------------------------|
+| 1 | mu = m_p/m_e = 1836.153            | A     | 8 ppb from 2 inputs                  |
+| 2 | Gamma_cl ≈ p^2 (p integer)         | B+    | 24.84 vs 25, requires Bohr rounding  |
+| 3 | Sigmoid universality (all → p=5)   | A     | Verified: tanh, erf, algebraic       |
+| 4 | Diophantine spectrum (n=4,6)       | N/A   | No known particles match (neutral)   |
+| 5 | lambda vs alpha relationship       | C     | Ratio=1.105, no clean connection     |
+| 6 | Occam uniqueness                   | A-    | 1 of 275, verified within bounds     |
+| 7 | n=3 uniqueness theorem             | A     | Dynamical selection matches reality  |
+
+GRADE DEFINITIONS:
+  A  = Quantitatively confirmed with high precision
+  B+ = Confirmed with minor gap (rounding, approximation)
+  C  = No clear confirmation, open question
+  N/A = Not testable with current data
+
+================================================================================
+OVERALL STATISTICAL ASSESSMENT
+================================================================================
+
+STRENGTHS:
+  1. Primary prediction matches to 8 ppb — probability ~10^-5 by chance
+  2. Information compression ratio 2.5-10.4:1 — genuine predictive content
+  3. n=3 uniqueness theorem — non-trivial structural match to physics
+  4. Sigmoid universality — robust to functional form choice
+  5. Derivation chain is algebraically transparent and verifiable
+  6. Residual source identified (lambda quantization) — not mysterious
+
+WEAKNESSES:
+  1. Framework predicts ONLY mu (one number), not a spectrum
+  2. c_1 = n/p is Occam selection, not derivation (1 hidden free parameter)
+  3. lambda ≈ 1.1 * alpha — no explanation
+  4. Diophantine solutions (n=4,6) predict non-existent particles
+  5. 460.8 sigma deviation from CODATA (using full precision uncertainty)
+     — publication draft incorrectly states 134 sigma
+  6. No predictions for alpha, G, or other fundamental constants
+  7. Cornell potential mapping is qualitative (dimensionless vs physical units)
+
+HONEST ASSESSMENT:
+  CUFT-RASP is a remarkable mathematical observation that the proton-to-
+  electron mass ratio can be approximated to 8 ppb by a simple recursion
+  with n=3 quarks as the sole input. The information-theoretic compression
+  is genuine. The structural theorems (n=3 uniqueness, sigmoid universality)
+  are non-trivial mathematical results.
+
+  However, calling this a "derivation" requires accepting the Occam
+  completion as equivalent to formal derivation — which it is not.
+  With c_1 as a free parameter, RASP has 1 input (n=3) and 1 adjustable
+  coefficient, making the match less surprising (though still impressive).
+
+  The framework's scope is extremely narrow: it produces ONE number (mu)
+  and cannot predict any other fundamental constant. A genuine theory of
+  fundamental physics would need to predict alpha, quark masses, coupling
+  constants, and the particle spectrum. RASP does none of this.
+
+  OVERALL GRADE: B+
+  (Strong mathematical observation with genuine predictive content,
+   but limited scope and one unresolved gap)
+
+================================================================================
+SIGMA DISCREPANCY NOTE (CORRECTION FOR PUBLICATION)
+================================================================================
+
+The publication draft states "134 sigma significance" and "8 ppb (0.7 sigma)."
+These use a ROUNDED CODATA value 1836.15267343(11) with uncertainty 1.1e-7.
+
+The FULL CODATA 2022 value is:
+  mu = 1836.152673426(32)
+  uncertainty = 3.2 x 10^-8
+
+Using CODATA full precision:
+  |M - mu| = 1.4746 x 10^-5
+  sigma = 1.4746e-5 / 3.2e-8 = 460.8
+
+RECOMMENDATION: The publication should use the full CODATA 2022 value and
+report 460.8 sigma, or explicitly state which uncertainty (and which digit
+count) is being used.
+
+================================================================================
+DATA EXPORT (MACHINE-READABLE)
+================================================================================
+
+{
+  "analysis": "CUFT-RASP Statistical Validation",
+  "date": "2026-02-13T12:31:00-06:00",
+  "directive": "dmn-work-20260213-123057-1",
+  "primary_prediction": {
+    "rasp_value": 1836.152688172043,
+    "rasp_exact": "853811/465",
+    "codata_value": 1836.152673426,
+    "codata_uncertainty": 3.2e-8,
+    "residual": 1.4746e-5,
+    "residual_ppb": 8.0,
+    "sigma_deviation_full": 460.8,
+    "sigma_deviation_rounded": 134.1
+  },
+  "random_match_probability": {
+    "method1_uniform": 1.52e-5,
+    "method2_rational": "<1e-2",
+    "method3_formula": "<3e-4"
+  },
+  "information_compression": {
+    "output_bits": 26.9,
+    "input_bits_min": 2.6,
+    "input_bits_occam": 10.7,
+    "compression_min": 10.4,
+    "compression_occam": 2.5
+  },
+  "structural_tests": {
+    "n3_uniqueness": "PASS",
+    "sigmoid_universality": "PASS",
+    "diophantine_spectrum": "NEUTRAL",
+    "occam_uniqueness": "PASS",
+    "lambda_alpha": "FAIL"
+  },
+  "toolkit_applicability": "LOW",
+  "overall_grade": "B+"
+}
+
+================================================================================
+TOOLKIT FUTURE USE RECOMMENDATIONS
+================================================================================
+
+The temporal-correlation-toolkit v2 would be valuable for CUFT-RASP in
+these FUTURE scenarios:
+
+1. HISTORICAL MEASUREMENT TIMELINE: Compile all mu measurements from
+   Millikan (1917) through CODATA 2022, with RASP-like theoretical
+   predictions overlaid. Test: did theory and experiment converge?
+
+2. FRAMEWORK COMPETITION TIMELINE: Track Recognition Science, Koide,
+   octonionic QG, Goldfain, and RASP predictions over time. Test:
+   which frameworks improve vs stagnate?
+
+3. EXPERIMENTAL TECHNOLOGY CORRELATION: Cross-correlate measurement
+   precision milestones (Penning traps, HD+ spectroscopy, lattice QCD)
+   with theoretical framework publications. Test: does theory drive
+   experiment or vice versa?
+
+4. CUFT-RASP EXTENSION TIMELINE: If RASP is extended to predict alpha
+   or quark masses, track prediction accuracy over framework versions.
+   Test: is the framework genuinely improving?
+
+================================================================================
+END OF REPORT
+================================================================================

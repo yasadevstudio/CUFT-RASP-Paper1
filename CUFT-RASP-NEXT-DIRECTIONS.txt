@@ -1,0 +1,166 @@
+===============================================================================
+CUFT-RASP: NEXT RESEARCH DIRECTIONS
+===============================================================================
+YASA PRESENTS — 2026-02-24
+Status: ACTIVE RESEARCH PROGRAM
+
+From the completed zero-free-parameter paper (CUFT-RASP-PUBLICATION-DRAFT).
+Ordered by tractability and impact.
+
+===============================================================================
+DIRECTION 1: SECOND-ORDER LAMBDA CORRECTION  [IMMEDIATE]
+===============================================================================
+
+GOAL: Derive a correction δλ such that λ = 1/(p³-1) + δλ pushes accuracy
+from 8 ppb to sub-ppb.
+
+CURRENT STATE:
+  λ_derived = 1/124 = 0.0080645...
+  λ_exact   = 0.0080200...  (back-calculated from μ_experimental)
+  Gap: 0.55% → produces entire 8 ppb residual
+
+APPROACH:
+  The current λ derivation uses tanh(x_s) → 1 (saturated regime).
+  But tanh(x_s) = tanh(24.8) = 1 - 2e^{-2x_s} + ... ≈ 1 - 2e^{-49.6}.
+  The exponential correction is negligible (~10^{-22}).
+
+  So the correction is NOT from tanh saturation. It must come from the
+  gain-coherence step: Γ_classical = 24.84 → Γ = 25. The quantization
+  error ΔΓ = 0.16 propagates through the entire chain.
+
+  If δλ = f(Γ_classical, p) can be computed, the corrected mass formula
+  M_corrected could achieve sub-ppb accuracy.
+
+POTENTIAL FORMS:
+  δλ = -(Γ_classical - p²) * something
+  δλ = -(√Γ_classical - p) * something
+  δλ proportional to (24.84 - 25)/25 = -0.0064
+
+STATUS: COMPLETED — DEAD END
+  Using Γ_classical makes λ worse (22.5 ppb vs 8 ppb original).
+  Integer quantization IMPROVES accuracy — the Bohr step is not a bug.
+  Script: cuft-lambda-correction.py
+
+===============================================================================
+DIRECTION 2: INTER-SOLUTION MASS RATIOS  [IMMEDIATE]
+===============================================================================
+
+GOAL: Check if ratios BETWEEN the three Diophantine predictions match
+ratios between known particles.
+
+CURRENT STATE:
+  M(3,5) = 1836.153 m_e  (proton ✓ at 8 ppb)
+  M(4,3) = 320.676 m_e   (no individual match — 163.9 MeV)
+  M(6,2) = 111.024 m_e   (no individual match — 56.7 MeV)
+
+INTER-SOLUTION RATIOS:
+  M(3,5)/M(4,3) = 5.726
+  M(3,5)/M(6,2) = 16.538
+  M(4,3)/M(6,2) = 2.888
+
+APPROACH:
+  Compute all ratios m_A/m_B for known particles (hadrons, leptons, mesons).
+  Search for matches to the three inter-solution ratios.
+  Also: what if M isn't a ratio to m_e but to some other scale?
+
+STATUS: COMPLETED — TWO HITS
+  M(3,5) - M(4,3) = 1515.476 m_e ≈ rho meson (1517.1 m_e, 0.11%)
+  M(4,3) - M(6,2) = 209.652 m_e ≈ muon (206.768 m_e, 1.4%)
+  Ratios between solutions also match: M(3,5)/M(4,3) ≈ rho/π⁰
+  Added to paper Section 9, item 2.
+  Script: cuft-inter-ratios.py
+
+===============================================================================
+DIRECTION 3: THE FINE STRUCTURE CONSTANT  [IMMEDIATE]
+===============================================================================
+
+GOAL: Determine if α ≈ 1/137.036 can be produced by a recursion in the
+RASP framework, or if it's already embedded.
+
+OBSERVATIONS:
+  - κ = 1/p = 1/5 is structurally similar to α (small dimensionless coupling)
+  - 137/5 = 27.4 ≈ Γ_classical = 24.84 (not exact, but suggestive)
+  - α = e²/(4π·ε₀·ℏ·c). Pure number. No dimensional input.
+  - The Koide formula relates lepton masses. RASP relates hadron mass to
+    electron mass. If α connects them, it bridges the two sectors.
+
+APPROACHES:
+  a) Is 1/α expressible as a function of (n, p, Γ, λ, X)?
+     Test: 137.036 vs combinations of {3, 5, 25, 124, 60, 31, ...}
+  b) Does a SEPARATE recursion with different parameters produce 1/α?
+     e.g., f(x) = Γ'·tanh^m(x) - λ'·x with m ≠ 3
+  c) Is α the "coupling at the UV threshold"?
+     We have κ = 1/p = 0.2 and λ = 0.00807. Is α a function of these?
+  d) What about α·M? Or α·p? Or α·n?
+     α·M = 137.036 * (could relate scales)
+
+STATUS: COMPLETED — BREAKTHROUGH
+  1/α = p³ + n(p-1) + n²/(2p³) = 137.036000 (6 ppb)
+  CODATA 2022: 137.035999177(21)
+  Integer part: 137 = p³ + n(p-1) = 125 + 12 (EXACT, unique to (3,5))
+  Fractional part: n²/(2p³) = 9/250 = 0.036
+  TWO fundamental constants from same (n,p) = (3,5) at single-digit ppb.
+  Added to paper as new Section 8, Equation (17).
+  Script: cuft-fine-structure.py
+
+===============================================================================
+DIRECTION 4: THE MUON MASS RATIO  [NEXT PAPER]
+===============================================================================
+
+GOAL: Derive m_μ/m_e = 206.768 from a recursion with n = 1 (single lepton).
+
+HYPOTHESIS:
+  Proton: n = 3 quarks, composite, confined → M = 1836.153
+  Muon:   n = 1 lepton, elementary, unconfined → M = 206.768?
+
+  With n = 1: Diophantine (n-2)(p-1) = 4 → (-1)(p-1) = 4 → p-1 = -4 → p = -3
+  This gives NEGATIVE p. The Diophantine breaks for n < 2.
+
+  Alternative: different Diophantine for leptons? Or different gate structure?
+
+STATUS: NOT YET ATTEMPTED — requires framework extension
+
+===============================================================================
+DIRECTION 5: PHYSICAL REALIZATION  [NEXT PAPER]
+===============================================================================
+
+GOAL: Show that f(x) = Γ·tanh^n(x) - λ·x is the mean-field equation of
+a specific physical system.
+
+CANDIDATES:
+  - Recurrent neural network (tanh activation, n-fold product gate)
+  - Spin glass partition function (n coupled Ising spins)
+  - Cavity QED with n modes (self-consistent field equation)
+  - BCS superconductor gap equation (self-consistency structure)
+
+IMPACT: If the recursion IS a physical system's mean-field equation,
+the mass ratio becomes a property of that system, not numerology.
+
+STATUS: NOT YET ATTEMPTED
+
+===============================================================================
+DIRECTION 6: THE SCHRÖDINGER (WHY Γ = p²)  [HARDEST / HIGHEST VALUE]
+===============================================================================
+
+GOAL: Derive that Γ must be a perfect square from the recursion's spectral
+structure, closing the Bohr→Schrödinger gap.
+
+APPROACHES:
+  a) Transfer operator: The recursion defines a transfer operator
+     T[f](x) = Γ·tanh^n(f(x)) - λ·f(x). Its spectral decomposition
+     might have eigenvalues that quantize Γ to integer squares.
+  b) Topological: Winding number of the map f(x)-x around the origin
+     might require integer √Γ for single-valuedness.
+  c) Modular: The recursion's fixed-point structure might connect to
+     modular forms. Φ₃(p) = p² + p + 1 already appears in the denominator.
+  d) Renormalization group: β-function of the recursion might have
+     fixed points only at Γ = p².
+
+IMPACT: This would upgrade the paper from "Bohr-level" to "Schrödinger-level"
+and close the last philosophical gap.
+
+STATUS: NOT YET ATTEMPTED — hardest open problem in the framework
+
+===============================================================================
+END — ACTIVE RESEARCH DIRECTIONS
+===============================================================================

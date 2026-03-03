@@ -1608,10 +1608,6 @@ pion and phi meson formulas, domain boundary analysis, and CODATA 2022
 full-precision experimental uncertainties (Ref [13]) were contributed
 by autonomous research processes (CIPHER) and verified manually.
 
-The four fundamental constants derived here -- m_p/m_e, 1/alpha, m_n/m_e,
-and m_mu/m_e -- are designated the Lima Constants, after the author's
-family name.
-
 ===============================================================================
 REFERENCES
 ===============================================================================
