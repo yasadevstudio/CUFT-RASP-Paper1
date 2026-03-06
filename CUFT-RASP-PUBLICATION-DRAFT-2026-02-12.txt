@@ -121,7 +121,7 @@ beyond n.
 
 NOTE ON NOMENCLATURE:
 CUFT-RASP: Coherence Unified Field Theory — Recursive Attractor
-Scaling Predictor. The acronym "CUFT" also appears in work by
+Stability Principle. The acronym "CUFT" also appears in work by
 J. Bentwich (2012-2024), who uses it for a philosophical framework
 ("Universal Computational Principle") addressing consciousness and
 physics. Bentwich's CUFT is a distinct body of work with no
