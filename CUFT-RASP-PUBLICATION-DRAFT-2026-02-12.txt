@@ -3,7 +3,7 @@ FOUR FUNDAMENTAL CONSTANTS OF NATURE
 FROM A GATED CUBIC RECURSION WITH ZERO FREE PARAMETERS
 ===============================================================================
 February 2026
-Author: YASA (YASA Development Studio)
+Author: Eliseu Spiller de Barros Lima (YASA Development Studio)
 
 ===============================================================================
 ABSTRACT
@@ -1678,6 +1678,12 @@ REFERENCES
      030401 (2017). Period-2 subharmonic response and Floquet
      eigenvalue classification.
 
+[RASP-II] E.S. de Barros Lima, "The RASP framework and the tubulin
+     aromatic triad: a quantitative bridge to orchestrated objective
+     reduction," in preparation (2026). Companion paper identifying
+     the physical substrate where p = 5 counts discrete electronic
+     states per aromatic chromophore below the protein absorption edge.
+
 ===============================================================================
 12. CONCLUSIONS AND OPEN QUESTIONS
 ===============================================================================
@@ -1688,6 +1694,14 @@ chain with zero free parameters. Three additional mass ratios (tau, pion,
 phi) extend the framework to seven constants at ppm precision, all sharing
 {2, 3, 5, 31} denominator closure. The recursion is a discrete time
 crystal whose Floquet multiplier is identically the UV threshold coupling.
+
+The Denominator Quantization Theorem (Step 2) proves that p must be a
+positive integer for denominator closure to hold. This algebraic
+requirement is consistent with p counting discrete quantum states of a
+physical system — specifically, the number of electronic excitations per
+constituent below a natural energy cutoff. The identification of what
+physical system realizes this counting, and why it selects p = 5, is
+developed in a companion paper [RASP-II].
 
 OPEN QUESTIONS:
 

@@ -1,3 +1,50 @@
 *.Zone.Identifier
 Zone.Identifier
 *:Zone.Identifier
+
+# Research notes, analysis docs, session records (not for publication)
+COHERENCE-*.txt
+CUFT-COHERENCE-*.txt
+CUFT-COMPLETE-*.txt
+CUFT-GAMMA-*.txt
+CUFT-LANDSCAPE-*.txt
+CUFT-MECHANISM-*.txt
+CUFT-PRESSURE-*.txt
+CUFT-RASP-BASE60-*.txt
+CUFT-RASP-BOHR-STEP-*.txt
+CUFT-RASP-COHERENCE-PROTOCOL-*.md
+CUFT-RASP-COMPLETE-PROOF-*.txt
+CUFT-RASP-COMPLETE-STATUS-*.txt
+CUFT-RASP-DIOPHANTINE-*.txt
+CUFT-RASP-DYNAMICAL-PROOF-*.txt
+CUFT-RASP-ELECTRON-MASS-*.txt
+CUFT-RASP-EXPERIMENTAL-*.txt
+CUFT-RASP-EXTERNAL-EVALUATION-*.txt
+CUFT-RASP-LAMBDA-EXTENSION-*.txt
+CUFT-RASP-NEXT-DIRECTIONS*.txt
+CUFT-RASP-PHYSICS-FOUNDATIONS-*.txt
+CUFT-RASP-STATISTICAL-VALIDATION-*.txt
+CUFT-RASP-TIME-CRYSTAL-*.txt
+DTC-*.txt
+RASP_Snapshot*.json
+
+# External/simplified versions (internal publishing versions only in repo)
+*-EXTERNAL.txt
+*-EXTERNAL-*.txt
+
+# Primary source extractions and review notes
+*PRIMARY-SOURCE*.txt
+PAPER2-PENDING-REVISIONS.txt
+FUTURE-PAPERS-NOTES.txt
+PENROSE-HAMEROFF-*.txt
+CUFT-RASP-ORCH-OR-GRAVITATIONAL-*.txt
+
+# Reference paper text extractions
+babcock2024.txt
+hagan2002.txt
+naskar2023.txt
+
+# Reference PDFs and raw data
+*.pdf
+*.pdb
+!1JFF.pdb
