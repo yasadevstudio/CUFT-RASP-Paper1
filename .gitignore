@@ -26,6 +26,7 @@ CUFT-RASP-PHYSICS-FOUNDATIONS-*.txt
 CUFT-RASP-STATISTICAL-VALIDATION-*.txt
 CUFT-RASP-TIME-CRYSTAL-*.txt
 DTC-*.txt
+PHOTONIC-*.txt
 RASP_Snapshot*.json
 
 # External/simplified versions (internal publishing versions only in repo)
