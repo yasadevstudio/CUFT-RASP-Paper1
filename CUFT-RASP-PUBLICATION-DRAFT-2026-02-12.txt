@@ -13,45 +13,28 @@ The proton-to-electron mass ratio mu = m_p/m_e = 1836.152673426(32) is
 derived from a single integer input -- the quark count n = 3 -- with
 zero free parameters. The gated cubic recursion
 f(x) = Gamma*tanh^n(x) - lambda*x determines all parameters through
-six steps requiring no axioms beyond the recursion structure. The gate
-order k = n is uniquely selected by simultaneous satisfiability of
-gain-coherence and the Diophantine constraint (n = 3 uniqueness
-theorem). A Bootstrap Theorem proves the subleading coefficient
-c_1 = n/p, confirmed by twenty-five independent arguments across eleven
-mathematical domains including vortex geometry on the Hopf fibration,
-Clebsch-Gordan coefficients, E_8 McKay correspondence, Mersenne-triangular
-number theory, variational ground state selection, and information-theoretic
-elimination. The derivation is sigmoid-class independent:
-replacing tanh with erf or x/sqrt(1+x^2) yields the same quantized
-coupling p = 5. A lambda-perturbation expansion in
-lambda = 1/(p^3-1) = 1/124 unifies four fundamental constants at
-sub-ppb precision after higher-order corrections:
+six steps requiring no axioms beyond the recursion structure. A
+Bootstrap Theorem proves the coupling c_1 = n/p, confirmed by
+twenty-five independent arguments across eleven mathematical domains.
+A lambda-perturbation expansion in lambda = 1/(p^3-1) = 1/124 unifies
+four fundamental constants at sub-ppb precision:
 
     m_p/m_e:  0.033 ppb     m_n/m_e:  0.009 ppb
     1/alpha:  0.118 ppb     m_mu/m_e: 15 ppb (0.68 sigma)
 
-The muon prediction (15 ppb) exceeds current experimental precision
-(22 ppb), constituting a genuine prediction. All results are exact
-rationals with denominators in {2, n, p, Phi_3(p)}, where
-Phi_3 = p^2+p+1 = 31; a Denominator Quantization Theorem proves this
-closure necessitates integer p. Three additional mass ratios -- tau
-(0.09 sigma), charged pion (0.84 sigma), phi meson (0.16 sigma) --
-match at ppm precision with the same denominator closure, yielding
-seven constants from two integers. The framework produces individual
-particle masses and the fine-structure constant but not nuclear
-binding energies or electromagnetic moments, delineating a
-single-particle domain boundary. The coupling c_1 = 3/5 is geometrically realized as the winding ratio
-of a T(3,5) torus knot on a Hopf torus, with the Diophantine constant
-equal to the unknotting number; dissipative Arnold tongue mode-locking
-selects this ratio, providing an independent geometric derivation. Five
-additional selection principles — number-theoretic (Mersenne-triangular
-identity uniquely selects p=5), representation-theoretic (Clebsch-Gordan
-|<1,0;2,0|3,0>|^2 = 3/5), variational ((3,5) extremizes all nine natural
-functionals), statistical (maximum entropy production), and
-information-theoretic (Data Processing Inequality + Jaynes selection)
-— independently converge on (3,5) from seven mathematical disciplines.
-The recursion is a discrete time crystal; a photonic experiment with
-{2,3,5,31} frequency signatures provides a falsifiable test (Appendix A).
+All results are exact rationals with denominators in {2, 3, 5, 31};
+a Denominator Quantization Theorem proves this closure necessitates
+integer p. Three additional masses (tau, pion, phi meson) match at
+ppm precision with the same denominator closure. The three strongest
+independent selection arguments are: (1) the Mersenne-triangular
+identity T_p = 2^(p-1)-1 uniquely selects p = 5 from pure number
+theory with zero physics input; (2) the Clebsch-Gordan coefficient
+|<1,0;2,0|3,0>|^2 = 3/5 exactly, coupling spin-1 (dim 3 = n) with
+spin-2 (dim 5 = p); (3) c_1 = 3/5 is geometrically realized as the
+winding ratio of a T(3,5) torus knot on a Hopf torus, with
+dissipative mode-locking selecting this ratio. A photonic time crystal
+experiment with {2,3,5,31} frequency signatures provides a falsifiable
+test with explicit kill criterion (Appendix A).
 
 ===============================================================================
 CLAIMS HIERARCHY
@@ -848,18 +831,25 @@ The muon prediction is already within experimental uncertainty. The
 proton and alpha residuals are definitively significant and require
 higher-order terms in the lambda-expansion.
 
-CORRECTION SEARCH METHODOLOGY:
+STRUCTURAL PATTERN:
+All three corrections share a common structure: they are monomial
+products of RASP parameters {n, p, Phi_3} at successive lambda orders
+(lambda^2 for proton and neutron, lambda^3 for alpha), with
+coefficients that are simple ratios of the framework's cyclotomic
+invariants. The proton correction involves a cross-solution cyclotomic
+ratio Phi_3(2)/Phi_3(5) = 7/31, connecting the primary (3,5) solution
+to the (6,2) sector — the first evidence that the three Diophantine
+solutions interact perturbatively. All corrected denominators maintain
+closure in {2, 3, 5, 31}.
 
-A systematic search was conducted over correction terms of the form:
-
-    delta = +/- (c_num / c_den) * lambda^k
-
-where c_num and c_den are products of RASP parameters
-{n, p, Phi_3(p), Phi_3(3), Phi_3(2)}, k = 2, 3, 4, and the
-corrected formula must maintain denominator closure in {2, 3, 5, 31}.
-From approximately 1,600 candidate correction terms, the unique
+DISCOVERY: These corrections were identified by systematic search over
+approximately 1,600 candidate terms of the form +/- (c_num/c_den) *
+lambda^k, where c_num and c_den are products of RASP parameters
+{n, p, Phi_3(p), Phi_3(3), Phi_3(2)} and k = 2, 3, 4. The unique
 clean-denominator correction of minimum algebraic complexity was
-identified for each residual.
+selected for each residual. Whether these terms can be derived from
+the recursion dynamics — rather than discovered by search — remains
+an open question (Section 12, question 2).
 
 PROTON CORRECTION -- CROSS-SOLUTION CYCLOTOMIC:
 
