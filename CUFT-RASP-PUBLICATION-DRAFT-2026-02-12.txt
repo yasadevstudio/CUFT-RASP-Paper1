@@ -1180,10 +1180,10 @@ c_1 UNIQUENESS (PROVED — BOOTSTRAP THEOREM):
    satisfies all three simultaneously.
    Therefore c_1 = n/p, c_{-1} = n^2 uniquely.                      QED
 
-   NINE INDEPENDENT CONFIRMATIONS:
-   The Bootstrap Theorem is confirmed by nine independent attack vectors
-   spanning algebraic, dynamical, number-theoretic, and topological
-   methods:
+   TEN INDEPENDENT CONFIRMATIONS:
+   The Bootstrap Theorem is confirmed by ten independent attack vectors
+   spanning algebraic, dynamical, number-theoretic, topological, and
+   vortex-geometric methods:
 
    TIER 1 — ALGEBRAIC:
    (1) Bootstrap A: p-independence of confinement (the theorem above)
@@ -1234,13 +1234,13 @@ c_1 UNIQUENESS (PROVED — BOOTSTRAP THEOREM):
        x^3 = y^5 encodes c_1 as a geometric identity. See Section 9D.
 
    PREVIOUSLY ESTABLISHED (seven arguments, Eqs 13-14 and above):
-   (10) Diophantine elimination: c_1 = n(n-2)/(n+2) (Eq 13)
-   (11) Taylor series reading: c_1 = n/sqrt(Gamma) (Eq 14)
-   (12) Occam uniqueness: unique minimum-|c_0| completion (18,605 scan)
-   (13) Exhaustive coefficient scan: unique among 525 combinations
-   (14) Cross-fixed-point virial: x_u*f'(x_u) = n/p + O(lambda)
-   (15) N-quark factorization: c_1 = n*(1/p), n copies of per-quark kappa
-   (16) Mean-field coupling: c_1 = n*kappa, Bohr analogy L = n*hbar
+   (11) Diophantine elimination: c_1 = n(n-2)/(n+2) (Eq 13)
+   (12) Taylor series reading: c_1 = n/sqrt(Gamma) (Eq 14)
+   (13) Occam uniqueness: unique minimum-|c_0| completion (18,605 scan)
+   (14) Exhaustive coefficient scan: unique among 525 combinations
+   (15) Cross-fixed-point virial: x_u*f'(x_u) = n/p + O(lambda)
+   (16) N-quark factorization: c_1 = n*(1/p), n copies of per-quark kappa
+   (17) Mean-field coupling: c_1 = n*kappa, Bohr analogy L = n*hbar
 
    TOTAL: Seventeen independent arguments across seven mathematical domains
    (algebra, dynamics, number theory, topology, combinatorics, perturbation
@@ -1464,12 +1464,14 @@ curve that winds n times in one direction and p times in the other on such
 a torus. Its winding ratio is n/p — the slope of the knot on the flat
 torus. For T(3,5), the winding ratio is exactly c_1 = 3/5.
 
-This identification is not analogy. The RASP recursion
-f(x) = Gamma*tanh^n(x) - lambda*x defines a discrete dynamical map whose
-attractor basin has the topology of a vortex tube. The cubic gate (n=3)
-wraps flow three times per cycle; the modular structure (p=5) partitions
-the orbit into five sectors. The ratio n/p = 3/5 IS the winding ratio of
-this discrete vortex, realized geometrically as T(3,5) on a Hopf torus.
+The RASP recursion f(x) = Gamma*tanh^n(x) - lambda*x is a 1D discrete
+map, but it encodes the same winding structure that, in continuous 3D
+flows, manifests as vortex tubes on Hopf tori. The cubic gate (n=3)
+produces three-fold winding per iteration; the modular structure (p=5)
+partitions the orbit into five sectors. The ratio n/p = 3/5 IS the
+winding ratio, realized geometrically as T(3,5) on a Hopf torus.
+Promoting this to a full 3D embedding remains an open question (see
+Section 12, question 7).
 
 KNOT INVARIANTS MATCH RASP CONSTANTS:
 The T(3,5) torus knot has the following invariants:
@@ -1481,8 +1483,8 @@ The T(3,5) torus knot has the following invariants:
 
 The unknotting number 4 = (n-1)(p-1)/2 = (n-2)(p-1) when evaluated at
 (3,5), since (3-1)(5-1)/2 = 4 and (3-2)(5-1) = 4 coincide. This is the
-Diophantine constant of the RASP framework. The genus equals c_2*p =
-(4/5)*5 = 4, the virial-weighted modular dimension. The knot group
+Diophantine constant of the RASP framework. The genus g(T(3,5)) =
+(n-1)(p-1)/2 = 4, identical to the unknotting number. The knot group
 presentation x^3 = y^5 states that three windings in one direction equal
 five windings in the other — the geometric encoding of c_1 = n/p.
 
@@ -1499,7 +1501,8 @@ for k = 0, 1, 2, ..., with multiplicity m_k = (k+1)(k+3) at each level
 
 At k = 2, the multiplicity factors as (k+1)(k+3) = 3 x 5 = n x p. This
 is the ONLY level where the multiplicity factorization produces the RASP
-parameters. The eigenvalue at this level is 4, the Diophantine constant.
+gate parameters (n,p) = (3,5) specifically. The eigenvalue at this level
+is 4, the Diophantine constant.
 The appearance of n, p, and (n-2)(p-1) in a single eigenvalue level of the
 curl operator on S^3 is a non-trivial structural coincidence that connects
 the RASP framework to the spectral geometry of the 3-sphere.
