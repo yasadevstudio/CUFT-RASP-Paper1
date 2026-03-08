@@ -1864,6 +1864,24 @@ single solution (n,p) = (3,5), c_1 = 3/5. The probability of this
 convergence being accidental — ten binary selections each with
 probability 1/3 (three Diophantine solutions) — is (1/3)^10 = 1.7e-5.
 
+WHY THE CONVERGENCE EXISTS:
+The integer p = 5 sits at the intersection of independent mathematical
+structures: the unique Mersenne-triangular solution, the unique
+cyclotomic Mersenne, the Klein icosahedral exponent, the E_8 McKay
+correspondence via the binary icosahedral group, and the Hopf torus
+knot winding ratio. None of these structures reference each other —
+they arise from number theory, invariant theory, Lie algebra
+classification, and differential geometry respectively. The RASP
+recursion does not select p = 5 because of these properties; it
+selects p = 5 because Gamma = p^2 must produce a stable attractor
+with integer quantization. But the integer that satisfies this
+dynamical requirement happens to be the one that is most constrained
+by pure mathematics — the nexus point where half a dozen independent
+structures converge. This suggests that the recursion's selection
+principle and the number-theoretic rigidity of 5 are not independent
+facts but two descriptions of the same underlying mathematical
+necessity.
+
 ===============================================================================
 10. RELATED STRUCTURES AND PHYSICAL CONTEXT
 ===============================================================================
