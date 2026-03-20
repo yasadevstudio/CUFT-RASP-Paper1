@@ -194,6 +194,29 @@ with $\sqrt{\Gamma} = 4.984\ldots$, placing it firmly in the $p = 5$
 quantization basin $[20.25, 30.25)$. This is the unique self-consistent
 gain for the cubic gate.
 
+\paragraph{Gain-coherence uniqueness.}
+The condition $|f'(x_u)|^k = \Gamma$ with $k = n$ is not an independent
+postulate---it is the \emph{unique} power for which the derived $p$
+satisfies the Diophantine $(n-2)(p-1) = 4$:
+
+\begin{center}
+\begin{tabular}{ccccc}
+\toprule
+$k$ & $\Gamma_k$ & $p = \mathrm{round}(\sqrt{\cdot})$ & $(n{-}2)(p{-}1)$ & Dioph? \\
+\midrule
+1 &   2.93 &  2 &  1 & no \\
+2 &   8.60 &  3 &  2 & no \\
+3 &  25.23 &  5 &  4 & \textbf{YES} \\
+4 &  74.00 &  9 &  8 & no \\
+5 & 217.05 & 15 & 14 & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Only $k = n = 3$ produces a $p$ satisfying the Diophantine. The
+condition is forced by compatibility: $k \neq n$ makes the gain-coherence
+and Diophantine select incompatible values of~$p$.
+
 \subsection*{Step 2: Integer Quantization ($\Gamma \to p$)}
 
 The classical gain~\eqref{eq:gamma-classical} is not an integer squared.
@@ -855,10 +878,31 @@ $m_n/m_e$   & $2120369999/1153200$   &  1153200 & $2^4 \cdot 3 \cdot 5^2 \cdot 3
 
 All corrected denominators factor exclusively through $\{2, 3, 5, 31\}$.
 
+\paragraph{Minimum complexity selection.}
+At every $\lambda$-order, the correction is the unique
+minimum-complexity RASP expression (fewest basis terms from
+$\{n, p, X, \Phithree, \lambda\}$): proton $-\Phithree(2)/\Phithree(5)$
+(2 terms, best of 83), alpha $-(n{+}p)/p$ (2~terms; competitor
+$-19/12$ eliminated by prime~19 outside $\{2,3,5,31\}$), neutron
+$np = 15$ (2~terms vs competitors at 3--4 terms).
+
 % ============================================================
 % SECTION 8C
 % ============================================================
 \section{Meson and Heavy Lepton Extensions}
+
+\paragraph{Inter-solution coupling structure.}
+Meson formulas arise from coupling between the three Diophantine
+solutions via their cyclotomic invariants $\Phithree(p)$. The pion
+leading term $n \cdot \Phithree(2) \cdot \Phithree(3) = 3 \times 7
+\times 13 = 273$ is the \emph{unique} triple product of RASP primes
+$\{2,3,5,7,13,31\}$ matching the pion mass (only other candidate:
+$3 \times 3 \times 31 = 279$, rejected at 2.1\%).
+
+The inter-solution coupling $\varepsilon$ is derived from RASP:
+pion $\varepsilon = (p^3{-}1)/(2p^3) = 124/250$ (half the excited
+Hilbert fraction, 89\,ppm match); muon $\varepsilon = n\lambda = 3/124$
+(per-quark decoherence rate, 0.59\% match). Zero free parameters.
 
 \paragraph{Tau lepton ($m_\tau/m_e$):}
 \begin{equation}\label{eq:tau}
@@ -969,6 +1013,13 @@ through distinct methodological paths (classical geometry, finite group
 ADE classification, and continuous $\mathrm{SU}(2)$ coupling,
 respectively). Conservatively treating them as one structural argument
 yields $\geq 22$ independent confirmations.}
+
+\paragraph{Klein coefficient identity.}
+The Klein icosahedral syzygy $T^2 = H^3 - 1728 f^5$ has exponents
+$(2, 3, 5) = (2, n, p)$ and coefficient $1728 = 12^3 = [n(p{-}1)]^3
+= [\text{virial}]^3$. The virial term $n(p{-}1) = 12$ is \emph{proved}
+equal to the Diophantine (Step~5). The Klein coefficient is the cube
+of the proved virial relation---an algebraic identity, not a coincidence.
 
 % ============================================================
 % SECTION 9D
