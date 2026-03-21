@@ -159,6 +159,7 @@
 - [x] All v0.7 additions present ✓ (copied from draft)
 
 ## 6. GIT REPO
-- [ ] All referenced scripts in repo
-- [ ] arXiv version in repo (NOT the draft)
-- [ ] Commit + push to yasadevstudio/CUFT-RASP-Paper1
+- [x] All 103 scripts staged and committed ✓
+- [x] arXiv version in repo (draft REMOVED from tracking) ✓
+- [x] Commit b25ed18 created ✓
+- [ ] Push to yasadevstudio/CUFT-RASP-Paper1 — AWAITING YASA AUTHORIZATION
