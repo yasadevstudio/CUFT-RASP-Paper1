@@ -219,10 +219,10 @@ and Diophantine select incompatible values of~$p$.
 
 \paragraph{Floquet-Lindblad derivation of gain-coherence (v1.0).}
 The gain-coherence condition is not an axiom --- it is the self-consistency
-condition of the Floquet-Lindblad map (Paper~2 \S3.4).
+condition of the Floquet-Lindblad stroboscopic map.
 $\Gamma = p^{n-1}$ is \emph{proved} from partition function channel
-counting (\S3.4.5, Level~A). The map $f(x) = \Gamma\tanh^n(x) - \lambda x$
-is \emph{proved} as the stroboscopic reduction (\S3.4.7). Self-consistency
+counting: each of the $n$ gate channels admits $p^{n-1}$ states, giving
+total gain $\Gamma = p^{n-1}$. Self-consistency
 requires the $n$-fold amplification at $x_u$ to equal the derived gain:
 $|f'(x_u)|^n = \Gamma$. The table above proves the \emph{form} ($k = n$);
 the Floquet derivation proves the \emph{value} ($\Gamma = p^{n-1}$).
@@ -1056,7 +1056,7 @@ Residual: $2.5\ppm$, $0.16\,\sigma$.
 
 \paragraph{Channel counting derivation (v1.0).}
 The meson leading terms follow from the \emph{same} Hilbert space channel
-counting that produces $\Gamma = p^{n-1}$ (Paper~2 \S3.4.5, Level~A).
+counting that produces $\Gamma = p^{n-1}$.
 Each solution has $p^3$ total states with $\Phithree(p) = (p^3{-}1)/(p{-}1)$
 non-trivial states per coupling channel. For single-solution gain:
 $\Gamma = p^{n-1}$ (proved). For cross-solution mass:
