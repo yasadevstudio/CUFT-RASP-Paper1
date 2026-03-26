@@ -37,6 +37,7 @@ mpmath
 | `cuft-c1-extended-precision.py` | Extended precision verification of c₁ = 3/5 |
 | `cuft-verify-hits.py` | All predicted mass ratios vs CODATA 2022 |
 | `cuft-fine-structure.py` | Fine-structure constant verification |
+| `gamma-first-principles-derivation.py` | First-principles derivation of Γ = p^(n-1) from partition function |
 
 ### Bohr Step Verification Suite
 
@@ -135,10 +136,6 @@ mpmath
 | `cuft-structural-analysis.py` | Structural analysis |
 | `cuft-structural-test.py` | Structural testing |
 | `cuft-third-constant-hunt.py` | Third constant search |
-
-## Reproducibility Note
-
-**One missing script:** `gamma-first-principles-derivation.py` is referenced in the paper (Section 2, Step 1) but is not yet included in this repository.
 
 ## License
 
