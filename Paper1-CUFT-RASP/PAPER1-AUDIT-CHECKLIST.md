@@ -129,7 +129,6 @@
 - [x] [22] Klein — Teubner (1884) ✓
 - [x] [BI1] Belle II — PRD 108, 032006 (2023), arXiv:2305.19116 ✓ VERIFIED
 - [x] [HF2] HFLAV 2025 — SciPost Phys. Proc. 17, 001 (2025) ✓ VERIFIED
-- [x] [RASP-II] Companion paper reference (in preparation) ✓
 
 ---
 
