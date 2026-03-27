@@ -9,9 +9,57 @@ Three proofs:
   3. Cubic recursion orbit structure → particle-like spectrum (numerical)
 """
 import numpy as np
+import math
 from collections import Counter
+from scipy.optimize import brentq
 
 SEP = "=" * 70
+
+# ==============================================================
+# PROOF 0: GAIN-COHERENCE EQUATION (referenced in paper Step 1)
+# ==============================================================
+print(f"\n{SEP}")
+print("PROOF 0: GAIN-COHERENCE — Gamma_classical = 24.8408...")
+print(SEP)
+
+n = 3
+
+def find_Gamma_classical(n_val):
+    """Solve |f_0'(x_u)|^n = Gamma for the undamped map f_0(x) = Gamma*tanh^n(x)."""
+    def residual(log_G):
+        G = math.exp(log_G)
+        if G < 1.01:
+            return -1.0
+        def g0(x):
+            return G * math.tanh(x)**n_val - x
+        xs = np.linspace(0.001, 5.0, 2000)
+        gs = np.array([g0(x) for x in xs])
+        xu = None
+        for i in range(len(gs) - 1):
+            if gs[i] < 0 and gs[i + 1] > 0:
+                xu = brentq(g0, xs[i], xs[i + 1])
+                break
+        if xu is None:
+            return -1.0
+        t = math.tanh(xu)
+        sech2 = 1.0 - t**2
+        fp_val = n_val * G * t**(n_val - 1) * sech2
+        return fp_val**n_val - G
+    log_G_sol = brentq(residual, math.log(20), math.log(30))
+    return math.exp(log_G_sol)
+
+Gamma_cl = find_Gamma_classical(n)
+sqrt_G = math.sqrt(Gamma_cl)
+p = round(sqrt_G)
+
+print(f"  n = {n}")
+print(f"  Gamma_classical = {Gamma_cl:.4f}")
+print(f"  sqrt(Gamma)     = {sqrt_G:.4f}")
+print(f"  p = round(sqrt) = {p}")
+print(f"  Quantization basin [{(p-0.5)**2:.2f}, {(p+0.5)**2:.2f}): {'IN' if (p-0.5)**2 <= Gamma_cl < (p+0.5)**2 else 'OUT'}")
+assert abs(Gamma_cl - 24.84) < 0.01, f"Gamma_classical mismatch: {Gamma_cl}"
+assert p == 5, f"p mismatch: {p}"
+print(f"  VERIFIED: Gamma_classical = 24.84, p = 5")
 
 # ==============================================================
 # PROOF 1: DENSITY FLUX → 1/r² FORCE LAW
