@@ -21,6 +21,8 @@ from fractions import Fraction
 from itertools import product
 import time
 
+start = time.time()
+
 n = 3
 p = 5
 X = n * p * (p - 1)  # = 60

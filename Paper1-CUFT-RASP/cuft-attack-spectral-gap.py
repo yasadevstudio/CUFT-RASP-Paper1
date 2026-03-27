@@ -209,12 +209,21 @@ print()
 # The gated map sends everything to 0 mod 3!
 
 # On Z/125Z: x → (3·x/5)³... 5⁻¹ mod 125 = ?
-inv5_125 = pow(5, -1, 125)
-print(f"  5⁻¹ mod 125 = {inv5_125}")
-c1_mod125 = (3 * inv5_125) % 125
-print(f"  c₁ = 3·5⁻¹ mod 125 = {c1_mod125}")
-gated_val = pow(c1_mod125, 3, 125)
-print(f"  (c₁)³ mod 125 = {gated_val}")
+# NOTE: 5 is NOT invertible mod 125 (gcd(5,125) = 5).
+# This is structurally significant: c₁ = 3/5 lives outside the unit group (Z/125Z)*.
+# The gate coupling connects coprime components non-invertibly.
+from math import gcd
+if gcd(5, 125) != 1:
+    print(f"  5⁻¹ mod 125: DOES NOT EXIST (gcd(5,125) = {gcd(5,125)})")
+    print(f"  c₁ = 3/5 is non-invertible mod 125 — structurally significant")
+    print(f"  The gate maps Z/125Z into a proper subgroup (annihilates 5-adic part)")
+else:
+    inv5_125 = pow(5, -1, 125)
+    print(f"  5⁻¹ mod 125 = {inv5_125}")
+    c1_mod125 = (3 * inv5_125) % 125
+    print(f"  c₁ = 3·5⁻¹ mod 125 = {c1_mod125}")
+    gated_val = pow(c1_mod125, 3, 125)
+    print(f"  (c₁)³ mod 125 = {gated_val}")
 print()
 
 # Study the map x → (c₁·x)³ mod 125 for various c₁
