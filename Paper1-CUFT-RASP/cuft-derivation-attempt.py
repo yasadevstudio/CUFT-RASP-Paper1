@@ -15,6 +15,7 @@ Goal: Find Γ and gating function where orbit energy ratios
 match measured baryon mass ratios.
 """
 import numpy as np
+import math
 from collections import defaultdict
 
 SEP = "=" * 72
@@ -123,7 +124,7 @@ def gated_cubic_map(x, gamma, lam, sigma_fn):
     """f(x) = Γ·σ³(x) - λ·x"""
     return gamma * sigma_fn(x)**3 - lam * x
 
-def find_orbits_gated(gamma, lam, sigma_fn, n_search=5000, n_iter=10000, n_record=500):
+def find_orbits_gated(gamma, lam, sigma_fn, n_search=100, n_iter=500, n_record=200):
     """Find all distinct stable orbits of the gated cubic map."""
     orbits = {}  # energy -> (period, points)
 
@@ -201,16 +202,17 @@ for sigma_name, sigma_fn in gating_functions.items():
     best_gamma = 0
     best_orbit_data = None
 
-    # Wider scan of Γ values
+    # Targeted scan of Γ values (reduced for runtime; full scan: uncomment below)
+    # gamma_scan = np.concatenate([np.linspace(0.5,5,50), np.linspace(5,20,30),
+    #                              np.linspace(20,100,20), np.linspace(100,1000,15)])
     gamma_scan = np.concatenate([
-        np.linspace(0.5, 5.0, 50),
-        np.linspace(5.0, 20.0, 30),
-        np.linspace(20.0, 100.0, 20),
-        np.linspace(100.0, 1000.0, 15),
+        np.linspace(0.5, 5.0, 10),
+        np.linspace(5.0, 30.0, 10),
+        [25.0],  # RASP Gamma
     ])
 
     for gamma in gamma_scan:
-        orbits = find_orbits_gated(gamma, delta, sigma_fn, n_search=1000, n_iter=5000, n_record=200)
+        orbits = find_orbits_gated(gamma, delta, sigma_fn)
 
         n_orb = len(orbits)
         if n_orb > max_orbits:
@@ -246,7 +248,7 @@ def complex_gated_map(psi, gamma, lam):
     """f(Ψ) = Γ·tanh³(Ψ) - λ·Ψ, complex."""
     return gamma * np.tanh(psi)**3 - lam * psi
 
-def find_complex_gated_orbits(gamma, lam, n_search=3000, n_iter=5000, n_record=300):
+def find_complex_gated_orbits(gamma, lam, n_search=100, n_iter=500, n_record=200):
     """Find stable orbits of complex gated cubic map."""
     orbits = {}
 
@@ -324,7 +326,7 @@ for mag in gamma_mags:
         scan_count += 1
         gamma = mag * np.exp(1j * phase)
 
-        orbits = find_complex_gated_orbits(gamma, delta, n_search=800, n_iter=3000, n_record=200)
+        orbits = find_complex_gated_orbits(gamma, delta)
 
         n_orb = len(orbits)
         if n_orb > best_complex_n:
@@ -471,7 +473,7 @@ best_match_orbits = None
 
 for gamma in gamma_fine:
     orbits = find_orbits_gated(gamma, delta, sigma_tanh,
-                                n_search=3000, n_iter=8000, n_record=300)
+                                )
 
     if len(orbits) >= 3:
         energies = sorted(orbits.keys())
@@ -597,7 +599,7 @@ for n in range(8):
         # n-th coefficient = n-th derivative / n!
         # polyfit returns highest degree first
         if n < len(p):
-            coeffs.append(p[-(n+1)] * np.math.factorial(n) / np.math.factorial(n))
+            coeffs.append(p[-(n+1)] * math.factorial(n) / math.factorial(n))
 
 print("  tanh³(x) = ", end="")
 for i, c in enumerate(coeffs[:8]):
